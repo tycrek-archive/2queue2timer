@@ -15,3 +15,7 @@ Joins 2b2t.org queue at a specific time.
 - This probably won't work in Fullscreen. Start the game in windowed, then just go fullscreen after it joins the queue.
 - Right now it only works for times during the current day. For example, if the current time is 10:00 PM, you can't set it to join at 1:00 AM the next day.
 - Turn off auto sleep or auto lock on your PC
+
+## Why is the code so shit
+
+I don't use Go very often. If you got a problem then open a PR lol
