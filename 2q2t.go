@@ -12,13 +12,11 @@ import (
 /* Strings */
 var pressEnter = "\nPress Enter to continue..."
 var done = "\n\nLiftoff! Joining 2b2t queue\n"
-var starting = "Starting countdown (you may not see any output for up to 60 seconds)\n"
 
 var step_1 = "\nStep 1: Capture mouse pointer"
 var step_1_1 ="  - Once you press Enter, you have 3 seconds to position your mouse pointer over the play button for 2b2t"
 var step_1_2 ="  - Have Minecraft in windowed mode to prevent any problems"
 var step_1_3 ="  - To cancel at any point in time, press CTRL+C"
-
 
 var step_2 = "\n\nStep 2: Enter queue time"
 var step_2_1 = "  - Enter a time for 2q2t to join the queue"
@@ -79,13 +77,23 @@ func step1() {
 	fmt.Println(step_1_1)
 	fmt.Println(step_1_2)
 	fmt.Println(step_1_3)
-	fmt.Println(pressEnter)
+	fmt.Print(pressEnter)
 	fmt.Scanln()
 
+	countdown := 3
+	for {
+		fmt.Print("\rCapturing in ", countdown, "...")
+		time.Sleep(1 * time.Second)
+		countdown--
+
+		if (countdown <= 0) {
+			break
+		}
+	}
+
 	// Wait 3 seconds and record mouse position
-	time.Sleep(3 * time.Second)
 	x, y = robotgo.GetMousePos()
-	fmt.Println("Mouse recorded at: [", x, "] [", y, "]")
+	fmt.Print("\rMouse recorded at: [", x, "] [", y, "]\n")
 }
 
 // Step 2: Get time to queue from user
@@ -96,7 +104,7 @@ func step2() {
 	fmt.Println(step_2_3)
 	fmt.Println(step_2_4)
 
-	fmt.Print("> ")
+	fmt.Print("\r", "> ")
 	fmt.Scanln(&userTime)
 	fmt.Println("\nWill queue at: ", userTime)
 }
@@ -108,9 +116,9 @@ func step3() {
 	fmt.Println(step_3_2)
 	fmt.Println(step_3_3)
 	fmt.Println(step_3_4)
-	fmt.Println(pressEnter)
+	fmt.Print(pressEnter)
 	fmt.Scanln()
-	fmt.Println(starting)
+	fmt.Println()
 
 	// Split the user entered string to get the hour and minute components
 	qtSplit := strings.Split(userTime, ":")
