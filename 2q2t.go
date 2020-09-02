@@ -20,13 +20,13 @@ var step_1_2 ="  - Have Minecraft in windowed mode to prevent any problems"
 var step_1_3 ="  - To cancel at any point in time, press CTRL+C"
 
 
-var step_2 = "\nStep 2: Enter queue time"
+var step_2 = "\n\nStep 2: Enter queue time"
 var step_2_1 = "  - Enter a time for 2q2t to join the queue"
 var step_2_2 = "  - At this time, 2q2t will auto click the play button to join the queue"
 var step_2_3 = "  - Use 24-hour time (example: 10 PM = 22)"
 var step_2_4 = "  - Use the following format: HH:MM"
 
-var step_3 = "\nStep 3: Wait"
+var step_3 = "\n\nStep 3: Wait"
 var step_3_1 = "  - When this countdown reaches 0, 2q2t will click the play button"
 var step_3_2 = "  - Make sure the play button is visible"
 var step_3_3 = "  - Do not move the Minecraft window from where it is now until you have joined queue"
@@ -39,15 +39,17 @@ var userTime string
 
 /* Functions */
 
+func formatRemaining(h int, m int, s int) {
+	fmt.Print("\r> ", h, " hours ", m, " minutes ", s," seconds left        ")
+}
+
 // Prints the remaining time until click
 func printRemaining(remaining int) {
-	if remaining >= 60 && remaining % 60 == 0 {
-		fmt.Print("\r", remaining / 60, " minutes left                ")
-	} else if remaining < 60 && remaining > 10 && remaining % 10 == 0 {
-		fmt.Print("\r", remaining, " seconds left                ")
-	} else if remaining < 10 {
-		fmt.Print("\r", remaining, " seconds left                ")
-	}
+	hLeft := int(remaining / (60 * 60))
+	mLeft := int(remaining / 60 % 60)
+	sLeft := int(remaining % 60)
+
+	formatRemaining(hLeft,mLeft,sLeft)
 }
 
 // Clicks the mouse
@@ -96,7 +98,7 @@ func step2() {
 
 	fmt.Print("> ")
 	fmt.Scanln(&userTime)
-	fmt.Println("Will queue at: ", userTime)
+	fmt.Println("\nWill queue at: ", userTime)
 }
 
 // Step 3: Count down and click play
