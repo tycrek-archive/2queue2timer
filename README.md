@@ -16,7 +16,3 @@ Joins 2b2t.org queue at a specific time.
 - This probably won't work in Fullscreen. Start the game in windowed, then just go fullscreen after it joins the queue.
 - If you input an hour that is less than the current hour (i.e. inputting `3` when the current hour is `14`), 2q2t will schedule the click for the next day. This allows you to set the timer before you go to bed and be in queue when you wake up.
 - Turn off auto sleep or auto lock on your PC
-
-## Why is the code so shit
-
-I don't use Go very often. If you got a problem then open a PR lol
