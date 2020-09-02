@@ -111,17 +111,23 @@ func step3() {
 	fmt.Println(starting)
 
 	// Split the user entered string to get the hour and minute components
-	qtsplit := strings.Split(userTime, ":")
-	qthour, _ := strconv.Atoi(qtsplit[0])
-	qtminute, _ := strconv.Atoi(qtsplit[1])
-
+	qtSplit := strings.Split(userTime, ":")
+	qtHour, _ := strconv.Atoi(qtSplit[0])
+	qtMinute, _ := strconv.Atoi(qtSplit[1])
+	
 	// Get the current time and the users timezone
 	t := time.Now()
 	tzone, offset := t.Zone()
 	loc :=  time.FixedZone(tzone, offset)
 
+	// Check if time is for the next day
+	qtDay := t.Day()
+	if qtHour < t.Hour() {
+		qtDay++
+	}
+
 	// Creat a Date object for the queue time
-	qt := time.Date(t.Year(), t.Month(), t.Day(), qthour, qtminute, 0, 0, loc)
+	qt := time.Date(t.Year(), t.Month(), qtDay, qtHour, qtMinute, 0, 0, loc)
 
 	// Loop until it is time to queue
 	for {
